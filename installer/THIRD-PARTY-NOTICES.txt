@@ -4,7 +4,7 @@ Noesis Thumbnails project code is licensed under the MIT License; see
 LICENSE. That license does not apply to the Noesis runtime or its plugins.
 
 Noesis 4.474 is written by Rich Whitehouse.
-Official site: https://www.richwhitehouse.com/noesis/
+Official site: https://www.richwhitehouse.com/index.php?content=inc_projects.php&showproject=91
 
 The installer is assembled locally from the user's supplied noesisv4474.zip.
 Its complete runtime, optional plugins, SDK archive, examples, and original

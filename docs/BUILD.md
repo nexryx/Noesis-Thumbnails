@@ -4,7 +4,7 @@ See [README.md](../README.md) for an introduction, installation instructions, an
 
 ## Build the installer
 
-Run commands from the repository root in 64-bit PowerShell on Windows. Obtain `noesisv4474.zip` from the [Noesis author](https://www.richwhitehouse.com/noesis/) and place it in the repository root, then run:
+Run commands from the repository root in 64-bit PowerShell on Windows. Obtain `noesisv4474.zip` from the [Noesis author](https://www.richwhitehouse.com/index.php?content=inc_projects.php&showproject=91) and place it in the repository root, then run:
 
 ```powershell
 .\scripts\build-msi.ps1
@@ -18,7 +18,7 @@ To use an archive in another location:
 
 The archive must contain `Noesis64.exe` at its root and include `pluginsource.zip` for the SDK. Noesis and its SDK are not included in this source repository.
 
-The script builds the C++17 native components, discovers supported formats, and creates `releases/NoesisThumbnails-<version>-x64.msi` and its `.sha256` checksum. The version is read from [`VERSION`](../VERSION), or can be overridden with `-Version`. Zig 0.14.1 and WiX 3.14.1 are downloaded and verified when needed.
+The script builds the C++17 native components, discovers supported formats, and creates `releases/NoesisThumbnails-<version>-x64.msi` and its `.sha256` checksum. The default version is `1.0.0`; use `-Version` to override it. Zig 0.14.1 and WiX 3.14.1 are downloaded and verified when needed.
 
 ## Test the installer
 
@@ -28,7 +28,7 @@ Noesis Thumbnails must be uninstalled before running the lifecycle test. The tes
 .\tests\msi-lifecycle.ps1
 ```
 
-The test selects the installer using [`VERSION`](../VERSION). Use `-MsiPath` to test a different installer. Test logs are written under `build/`.
+The test selects `releases/NoesisThumbnails-1.0.0-x64.msi` by default. Use `-MsiPath` to test a different installer. Test logs are written under `build/`.
 
 ## Run regression tests
 

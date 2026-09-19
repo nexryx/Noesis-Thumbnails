@@ -1,6 +1,6 @@
 # Noesis Thumbnails
 
-Model and texture thumbnails in Windows Explorer, powered by [Noesis](https://www.richwhitehouse.com/noesis/). For Windows 10/11 x64, with Noesis included in the installer.
+Model and texture thumbnails in Windows Explorer, powered by [Noesis](https://www.richwhitehouse.com/index.php?content=inc_projects.php&showproject=91). For Windows 10/11 x64, with Noesis included in the installer.
 
 ## Install
 

@@ -2,8 +2,7 @@ param([string]$MsiPath)
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 if (-not $MsiPath) {
-    $version = (Get-Content -LiteralPath (Join-Path $root 'VERSION') -Raw).Trim()
-    $MsiPath = Join-Path $root "releases\NoesisThumbnails-$version-x64.msi"
+    $MsiPath = Join-Path $root 'releases\NoesisThumbnails-1.0.0-x64.msi'
 }
 $msiPath = (Resolve-Path -LiteralPath $MsiPath).Path
 $installFolder = Join-Path $env:LOCALAPPDATA 'Programs\NoesisThumbnails'

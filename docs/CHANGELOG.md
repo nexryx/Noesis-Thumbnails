@@ -2,8 +2,6 @@
 
 ## 1.0.0
 
-Initial release in preparation.
-
 - Explorer thumbnail provider with a separate persistent Noesis worker.
 - Model and image rendering, disk caching, and automatic format discovery.
 - Model orientation based on Noesis reader rotations and format axis metadata.

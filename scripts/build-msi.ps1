@@ -1,5 +1,5 @@
 param(
-    [string]$Version,
+    [string]$Version = '1.0.0',
     [string]$NoesisArchive = (Join-Path (Split-Path $PSScriptRoot -Parent) 'noesisv4474.zip'),
     [string]$WixDirectory,
     [string]$Zig,
@@ -7,7 +7,6 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Split-Path $PSScriptRoot -Parent))
-if (-not $Version) { $Version = (Get-Content -LiteralPath (Join-Path $root 'VERSION') -Raw).Trim() }
 if ($Version -notmatch '^\d{1,3}\.\d{1,3}\.\d{1,5}$') { throw 'Use an MSI version such as 1.0.0' }
 $versionParts = $Version.Split('.')
 if ([int]$versionParts[0] -gt 255 -or [int]$versionParts[1] -gt 255 -or [int]$versionParts[2] -gt 65535) { throw 'MSI version components must be <= 255.255.65535' }

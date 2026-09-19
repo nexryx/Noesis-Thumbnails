@@ -31,6 +31,6 @@ MSI repair is available by opening this MSI again.
 
 NOESIS
 Noesis is written by Rich Whitehouse:
-  https://www.richwhitehouse.com/noesis/
+  https://www.richwhitehouse.com/index.php?content=inc_projects.php&showproject=91
 Original documentation and notices: noesis\ReadMe.txt
 See THIRD-PARTY-NOTICES.txt for bundling and redistribution information.
