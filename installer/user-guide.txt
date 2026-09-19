@@ -1,0 +1,36 @@
+NOESIS THUMBNAILS @VERSION@
+
+INSTALL
+Double-click NoesisThumbnails-@VERSION@-x64.msi and choose Install.
+Noesis 4.474 and its runtime are included; no separate download is needed.
+The application installs for the current Windows user at:
+  %LOCALAPPDATA%\Programs\NoesisThumbnails
+
+USE
+Open a folder containing supported models/textures in Windows Explorer.
+Choose Large icons or Extra large icons. The first thumbnail is generated
+in the background; press F5 if the folder has not refreshed automatically.
+Supported extensions are listed in formats.csv in this application folder.
+The default application used to open your files is not changed.
+
+UNINSTALL
+Open Windows Settings > Apps > Installed apps.
+Find "Noesis Thumbnails" and select Uninstall.
+The bundled Noesis runtime, application files, registry associations and
+the application's cache are removed. Previous thumbnail handlers are
+restored when their association is still owned by Noesis Thumbnails.
+Windows maintains a separate shared thumbnail cache, which may briefly
+show previously generated thumbnails even after uninstalling a provider.
+
+TROUBLESHOOTING
+Log: %LOCALAPPDATA%\NoesisThumbnails\worker.log
+Files without renderable geometry/images, missing companion assets,
+unsupported variants, and files requiring an interactive plugin dialog
+may not generate thumbnails. Remote/cloud-only files are skipped.
+MSI repair is available by opening this MSI again.
+
+NOESIS
+Noesis is written by Rich Whitehouse:
+  https://www.richwhitehouse.com/noesis/
+Original documentation and notices: noesis\ReadMe.txt
+See THIRD-PARTY-NOTICES.txt for bundling and redistribution information.

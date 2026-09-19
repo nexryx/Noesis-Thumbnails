@@ -1,0 +1,4 @@
+LIBRARY NoesisThumbnailProvider
+EXPORTS
+    DllGetClassObject
+    DllCanUnloadNow

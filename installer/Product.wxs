@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="Noesis Thumbnails" Language="1033" Version="$(var.Version)" Manufacturer="Noesis Thumbnails" UpgradeCode="11BDF036-74C7-49C6-AE7A-789C229304E3">
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perUser" InstallPrivileges="limited" Platform="x64" Description="Explorer thumbnails with bundled Noesis 4.474" />
+    <MajorUpgrade DowngradeErrorMessage="A newer Noesis Thumbnails version is installed." AllowSameVersionUpgrades="yes" Schedule="afterInstallInitialize" />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+    <Condition Message="Noesis Thumbnails requires 64-bit Windows.">Installed OR VersionNT64</Condition>
+    <Property Id="ARPCOMMENTS" Value="Windows Explorer thumbnails. Includes Noesis 4.474 by Rich Whitehouse." />
+    <SetProperty Id="ARPINSTALLLOCATION" Value="[INSTALLFOLDER]" After="CostFinalize" />
+    <Property Id="MSIRESTARTMANAGERCONTROL" Value="DisableShutdown" />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="LocalAppDataFolder">
+        <Directory Id="ProgramsFolder" Name="Programs">
+          <Directory Id="INSTALLFOLDER" Name="NoesisThumbnails">
+            <Component Id="ShellClass" Guid="A01CEFD1-E6C1-479E-9DA3-32322BFFB350" Win64="yes">
+              <RegistryValue Root="HKCU" Key="Software\Classes\CLSID\{53EAB7B8-41B9-462B-90DB-BC16434161C7}" Type="string" Value="Noesis Thumbnails" />
+              <RegistryValue Root="HKCU" Key="Software\Classes\CLSID\{53EAB7B8-41B9-462B-90DB-BC16434161C7}" Name="DisableProcessIsolation" Type="integer" Value="1" />
+              <RegistryValue Root="HKCU" Key="Software\Classes\CLSID\{53EAB7B8-41B9-462B-90DB-BC16434161C7}\InprocServer32" Type="string" Value="[INSTALLFOLDER]NoesisThumbnailProvider.dll" KeyPath="yes" />
+              <RegistryValue Root="HKCU" Key="Software\Classes\CLSID\{53EAB7B8-41B9-462B-90DB-BC16434161C7}\InprocServer32" Name="ThreadingModel" Type="string" Value="Apartment" />
+              <RemoveFolder Id="RemoveInstallFolder" On="uninstall" />
+              <RemoveFolder Id="RemoveEmptyProgramsFolder" Directory="ProgramsFolder" On="uninstall" />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+    <Feature Id="Complete" Title="Noesis Thumbnails and Noesis runtime" Level="1">
+      <ComponentRef Id="ShellClass" />
+      <ComponentGroupRef Id="Payload" />
+    </Feature>
+    <Binary Id="InstallerActions" SourceFile="$(var.ActionsDll)" />
+    <CustomAction Id="SetStopWorker" Property="StopWorker" Value="[INSTALLFOLDER]" />
+    <CustomAction Id="StopWorker" BinaryKey="InstallerActions" DllEntry="StopWorker" Execute="deferred" Impersonate="yes" Return="check" />
+    <CustomAction Id="SetRegisterHooks" Property="RegisterHooks" Value="[INSTALLFOLDER]" />
+    <CustomAction Id="RegisterHooks" BinaryKey="InstallerActions" DllEntry="RegisterHooks" Execute="deferred" Impersonate="yes" Return="check" />
+    <CustomAction Id="SetRollbackInstall" Property="RollbackInstall" Value="[INSTALLFOLDER]" />
+    <CustomAction Id="RollbackInstall" BinaryKey="InstallerActions" DllEntry="RollbackInstall" Execute="rollback" Impersonate="yes" Return="check" />
+    <CustomAction Id="SetUnregisterHooks" Property="UnregisterHooks" Value="[INSTALLFOLDER]" />
+    <CustomAction Id="UnregisterHooks" BinaryKey="InstallerActions" DllEntry="UnregisterHooks" Execute="deferred" Impersonate="yes" Return="check" />
+    <CustomAction Id="SetRollbackUninstall" Property="RollbackUninstall" Value="[INSTALLFOLDER]" />
+    <CustomAction Id="RollbackUninstall" BinaryKey="InstallerActions" DllEntry="RegisterHooks" Execute="rollback" Impersonate="yes" Return="check" />
+    <CustomAction Id="SetCleanup" Property="Cleanup" Value="[INSTALLFOLDER]" />
+    <CustomAction Id="Cleanup" BinaryKey="InstallerActions" DllEntry="Cleanup" Execute="commit" Impersonate="yes" Return="check" />
+    <InstallExecuteSequence>
+      <Custom Action="SetStopWorker" After="InstallInitialize">1</Custom>
+      <Custom Action="StopWorker" After="SetStopWorker">1</Custom>
+      <Custom Action="SetRollbackUninstall" Before="RollbackUninstall">Installed AND REMOVE="ALL"</Custom>
+      <Custom Action="RollbackUninstall" Before="SetUnregisterHooks">Installed AND REMOVE="ALL"</Custom>
+      <Custom Action="SetUnregisterHooks" Before="UnregisterHooks">Installed AND REMOVE="ALL"</Custom>
+      <Custom Action="UnregisterHooks" Before="RemoveFiles">Installed AND REMOVE="ALL"</Custom>
+      <Custom Action="SetRollbackInstall" After="WriteRegistryValues">NOT Installed</Custom>
+      <Custom Action="RollbackInstall" After="SetRollbackInstall">NOT Installed</Custom>
+      <Custom Action="SetRegisterHooks" After="RollbackInstall">NOT REMOVE="ALL"</Custom>
+      <Custom Action="RegisterHooks" After="SetRegisterHooks">NOT REMOVE="ALL"</Custom>
+      <Custom Action="SetCleanup" Before="Cleanup">Installed AND REMOVE="ALL" AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="Cleanup" Before="InstallFinalize">Installed AND REMOVE="ALL" AND NOT UPGRADINGPRODUCTCODE</Custom>
+    </InstallExecuteSequence>
+    <UIRef Id="WixUI_Minimal" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.NoticeRtf)" />
+  </Product>
+</Wix>

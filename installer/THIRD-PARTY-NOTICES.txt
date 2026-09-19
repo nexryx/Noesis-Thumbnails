@@ -1,0 +1,21 @@
+Noesis Thumbnails - bundled third-party software
+
+Noesis Thumbnails project code is licensed under the MIT License; see
+LICENSE. That license does not apply to the Noesis runtime or its plugins.
+
+Noesis 4.474 is written by Rich Whitehouse.
+Official site: https://www.richwhitehouse.com/noesis/
+
+The installer is assembled locally from the user's supplied noesisv4474.zip.
+Its complete runtime, optional plugins, SDK archive, examples, and original
+ReadMe.txt are preserved in the installed noesis directory. The project adds
+its own Python bridge and format inventory DLLs without modifying Noesis
+executables or the original bundled plugin files.
+
+Consult noesis/ReadMe.txt and notices in the bundled files for the original
+author's terms. This project does not claim authorship of Noesis and does
+not grant additional rights to redistribute Noesis or third-party plugins.
+Public redistribution permission for this repackaged installer has not been
+established; confirm the applicable permissions before publishing it.
+
+Zig and WiX are build tools and are not required on the target computer.
